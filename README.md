@@ -1,2 +1,12 @@
-# VisualNovelEngine
+# Visual Novel Engine
 Engine for visual novel games written in C++.
+
+- Builtin scenario editor.
+- Automatic character centering.
+- Basic and advanced character rendering mode.
+- Music and sound support.
+- Ton of shitcode.
+
+Credits
+https://www.un4seen.com/ - Audio library
+https://github.com/ocornut/imgui/ - GUI library
