@@ -313,7 +313,7 @@ std::wstring current_time()
 std::wstring get_screenshot_name()
 {
 #if defined(DCS_CONFIG)
-	std::string game = "DVI Cable Simulator";
+	std::wstring game = L"DVI Cable Simulator";
 #elif defined(DDLC_CPP_CONFIG)
 	std::wstring game = L"Doki Doki Literature Club";
 #endif
@@ -467,7 +467,7 @@ void read_game_info_from_file()
 	wchar_t game_rpc_app_logo[260];
 
 	GetPrivateProfileStringW(L"GameInfo", L"game_name", L"DVI Cable Simulator", game_name, 260, L".\\game\\game_info.ini");
-	GetPrivateProfileStringW(L"GameInfo", L"game_developer", L"Komok Software", game_developer, 260, L".\\game\\game_info.ini");
+	GetPrivateProfileStringW(L"GameInfo", L"game_developer", L"Rabbit Software", game_developer, 260, L".\\game\\game_info.ini");
 
 	GetPrivateProfileStringW(L"GameInfo", L"game_rpc_app_id", L"1256185678920941628", game_rpc_app_id, 260, L".\\game\\game_info.ini");
 	GetPrivateProfileStringW(L"GameInfo", L"game_rpc_app_logo", L"logo", game_rpc_app_logo, 260, L".\\game\\game_info.ini");
@@ -1507,15 +1507,15 @@ void audio_settings_menu()
 	if (position.x != FLT_MAX)
 		ImGui::SetNextWindowPos(position);
 
-	ImGui::Begin(LANG(L"Audio settings", L"Настройки звука"), (bool*)0, flags);
+	ImGui::Begin(LANG(L"Audio settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ Г§ГўГіГЄГ "), (bool*)0, flags);
 
-	ImGui::Text(LANG(L"Music volume", L"Громкость музыки"));
+	ImGui::Text(LANG(L"Music volume", L"ГѓГ°Г®Г¬ГЄГ®Г±ГІГј Г¬ГіГ§Г»ГЄГЁ"));
 	ImGui::SliderInt("##MUSICVOL", &new_settings.music_volume, 0, 100);
 
-	ImGui::Text(LANG(L"Sound volume", L"Громкость звуков"));
+	ImGui::Text(LANG(L"Sound volume", L"ГѓГ°Г®Г¬ГЄГ®Г±ГІГј Г§ГўГіГЄГ®Гў"));
 	ImGui::SliderInt("##SOUNDVOL", &new_settings.sound_volume, 0, 100);
 
-	if (ImGui::Button(LANG(L"Apply", L"Применить")))
+	if (ImGui::Button(LANG(L"Apply", L"ГЏГ°ГЁГ¬ГҐГ­ГЁГІГј")))
 	{
 		write_audio_settings_to_file(new_settings);
 		audio_settings = new_settings;
@@ -1523,12 +1523,12 @@ void audio_settings_menu()
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(LANG(L"Cancel", L"Отмена")))
+	if (ImGui::Button(LANG(L"Cancel", L"ГЋГІГ¬ГҐГ­Г ")))
 		new_settings = audio_settings;
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(LANG(L"Close", L"Закрыть")))
+	if (ImGui::Button(LANG(L"Close", L"Г‡Г ГЄГ°Г»ГІГј")))
 		audio_settings_open = false;
 
 	ImGui::End();
@@ -1554,20 +1554,20 @@ void game_settings_menu()
 	if (position.x != FLT_MAX)
 		ImGui::SetNextWindowPos(position);
 
-	ImGui::Begin(LANG(L"Game settings", L"Настройки игры"), (bool*)0, flags);
+	ImGui::Begin(LANG(L"Game settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГЁГЈГ°Г»"), (bool*)0, flags);
 
-	ImGui::Checkbox(LANG(L"Auto save", L"Автосохранение"), &new_settings.auto_save);
-	ImGui::Checkbox(LANG(L"Show FPS counter", L"Показывать счетчик FPS"), &new_settings.show_fps_counter);
+	ImGui::Checkbox(LANG(L"Auto save", L"ГЂГўГІГ®Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ"), &new_settings.auto_save);
+	ImGui::Checkbox(LANG(L"Show FPS counter", L"ГЏГ®ГЄГ Г§Г»ГўГ ГІГј Г±Г·ГҐГІГ·ГЁГЄ FPS"), &new_settings.show_fps_counter);
 
-	ImGui::Checkbox(LANG(L"Animated dialogue text", L"Анимированный текст диалогов"), &new_settings.animated_dialogue_text);
+	ImGui::Checkbox(LANG(L"Animated dialogue text", L"ГЂГ­ГЁГ¬ГЁГ°Г®ГўГ Г­Г­Г»Г© ГІГҐГЄГ±ГІ Г¤ГЁГ Г«Г®ГЈГ®Гў"), &new_settings.animated_dialogue_text);
 
-	ImGui::Text(LANG(L"Text animation speed", L"Скорость анимации текста"));
+	ImGui::Text(LANG(L"Text animation speed", L"Г‘ГЄГ®Г°Г®Г±ГІГј Г Г­ГЁГ¬Г Г¶ГЁГЁ ГІГҐГЄГ±ГІГ "));
 	ImGui::SliderInt("##Text animation speed", &new_settings.text_animation_speed, 1, 100);
 
-	ImGui::Text(LANG(L"Menu language", L"Язык меню"));
+	ImGui::Text(LANG(L"Menu language", L"ГџГ§Г»ГЄ Г¬ГҐГ­Гѕ"));
 	LanguageCombo("##Menu language", &new_settings.menu_language, languages, languages.size());
 
-	if (ImGui::Button(LANG(L"Apply", L"Применить")))
+	if (ImGui::Button(LANG(L"Apply", L"ГЏГ°ГЁГ¬ГҐГ­ГЁГІГј")))
 	{
 		write_game_settings_to_file(new_settings);
 		game_settings = new_settings;
@@ -1575,12 +1575,12 @@ void game_settings_menu()
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(LANG(L"Cancel", L"Отмена")))
+	if (ImGui::Button(LANG(L"Cancel", L"ГЋГІГ¬ГҐГ­Г ")))
 		new_settings = game_settings;
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(LANG(L"Close", L"Закрыть")))
+	if (ImGui::Button(LANG(L"Close", L"Г‡Г ГЄГ°Г»ГІГј")))
 		game_settings_open = false;
 
 	ImGui::End();
@@ -1606,35 +1606,35 @@ void video_settings_menu()
 	if (position.x != FLT_MAX)
 		ImGui::SetNextWindowPos(position);
 
-	ImGui::Begin(LANG(L"Video settings", L"Настройки видео"), (bool*)0, flags);
+	ImGui::Begin(LANG(L"Video settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГўГЁГ¤ГҐГ®"), (bool*)0, flags);
 
-	ImGui::Text(LANG(L"Render mode", L"Режим рендеринга"));
+	ImGui::Text(LANG(L"Render mode", L"ГђГҐГ¦ГЁГ¬ Г°ГҐГ­Г¤ГҐГ°ГЁГ­ГЈГ "));
 	ImGui::Combo("##Render mode", &new_settings.render_mode, RenderMode, ARRAYSIZE(RenderMode));
 
-	ImGui::Text(LANG(L"Window mode", L"Режим окна"));
+	ImGui::Text(LANG(L"Window mode", L"ГђГҐГ¦ГЁГ¬ Г®ГЄГ­Г "));
 	ImGui::Combo("##Window mode", &new_settings.screen_mode, ScreenMode, ARRAYSIZE(ScreenMode));
 
-	ImGui::Checkbox(LANG(L"VSync", L"Верт. синхронизация"), &new_settings.vsync);
+	ImGui::Checkbox(LANG(L"VSync", L"Г‚ГҐГ°ГІ. Г±ГЁГ­ГµГ°Г®Г­ГЁГ§Г Г¶ГЁГї"), &new_settings.vsync);
 
-	ImGui::Text(LANG(L"Texture quality", L"Качество текстур"));
+	ImGui::Text(LANG(L"Texture quality", L"ГЉГ Г·ГҐГ±ГІГўГ® ГІГҐГЄГ±ГІГіГ°"));
 	ImGui::Combo("##Texture quality", &new_settings.texture_quality, TextureQuality, ARRAYSIZE(TextureQuality));
 
-	if (ImGui::Button(LANG(L"Apply", L"Применить")))
+	if (ImGui::Button(LANG(L"Apply", L"ГЏГ°ГЁГ¬ГҐГ­ГЁГІГј")))
 	{
 		write_video_settings_to_file(new_settings);
 		
 		if (video_settings.screen_mode != 0)
-			MessageBoxW(GetForegroundWindow(), LANG_W(L"Restart game to apply settings", L"Перезапустите игру для применения настроек"), LANG_W(L"Success", L"Успешно"), 0);
+			MessageBoxW(GetForegroundWindow(), LANG_W(L"Restart game to apply settings", L"ГЏГҐГ°ГҐГ§Г ГЇГіГ±ГІГЁГІГҐ ГЁГЈГ°Гі Г¤Г«Гї ГЇГ°ГЁГ¬ГҐГ­ГҐГ­ГЁГї Г­Г Г±ГІГ°Г®ГҐГЄ"), LANG_W(L"Success", L"Г“Г±ГЇГҐГёГ­Г®"), 0);
 	}
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(LANG(L"Cancel", L"Отмена")))
+	if (ImGui::Button(LANG(L"Cancel", L"ГЋГІГ¬ГҐГ­Г ")))
 		new_settings = video_settings;
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(LANG(L"Close", L"Закрыть")))
+	if (ImGui::Button(LANG(L"Close", L"Г‡Г ГЄГ°Г»ГІГј")))
 		video_settings_open = false;
 
 	ImGui::End();
@@ -1651,12 +1651,12 @@ void save_menu(Scenario_t& scenario)
 	ImGui::Begin("##GAMESAVEMENU", &save_menu_open, ImGuiWindowFlags_::ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_::ImGuiWindowFlags_NoResize);
 
 	static char save_name[260];
-	ImGui::Text(LANG(L"Enter save name", L"Введите имя сохранения"));
+	ImGui::Text(LANG(L"Enter save name", L"Г‚ГўГҐГ¤ГЁГІГҐ ГЁГ¬Гї Г±Г®ГµГ°Г Г­ГҐГ­ГЁГї"));
 
 	ImGui::SetNextItemWidth(240);
 	ImGui::InputText("##Save name input", save_name, 260);
 
-	if (ImGui::Button(LANG(L"Save", L"Сохранить"), ImVec2(240, 20)))
+	if (ImGui::Button(LANG(L"Save", L"Г‘Г®ГµГ°Г Г­ГЁГІГј"), ImVec2(240, 20)))
 	{
 		wchar_t save_name_w[260];
 		mbstowcs(save_name_w, save_name, 259);
@@ -1704,7 +1704,7 @@ void main_game_menu(Scenario_t& scenario)
 	ImGui::Separator();
 	ImGui::Spacing();
 
-	if (ImGui::Button(LANG(L"Back to game", L"Вернуться к игре"), ImVec2(230, 20)))
+	if (ImGui::Button(LANG(L"Back to game", L"Г‚ГҐГ°Г­ГіГІГјГ±Гї ГЄ ГЁГЈГ°ГҐ"), ImVec2(230, 20)))
 	{
 		game_menu_open = false;
 		save_menu_open = false;
@@ -1712,7 +1712,7 @@ void main_game_menu(Scenario_t& scenario)
 
 	if (!scenario_editor)
 	{
-		if (ImGui::Button(LANG(L"Save game", L"Сохранить игру"), ImVec2(230, 20)))
+		if (ImGui::Button(LANG(L"Save game", L"Г‘Г®ГµГ°Г Г­ГЁГІГј ГЁГЈГ°Гі"), ImVec2(230, 20)))
 			save_menu_open = !save_menu_open;
 	}
 
@@ -1720,23 +1720,23 @@ void main_game_menu(Scenario_t& scenario)
 	ImGui::Separator();
 	ImGui::Spacing();
 
-	if (ImGui::Button(LANG(L"Video settings", L"Настройки видео"), ImVec2(230, 20)))
+	if (ImGui::Button(LANG(L"Video settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГўГЁГ¤ГҐГ®"), ImVec2(230, 20)))
 		video_settings_open = !video_settings_open;
 
-	if (ImGui::Button(LANG(L"Audio settings", L"Настройки звука"), ImVec2(230, 20)))
+	if (ImGui::Button(LANG(L"Audio settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ Г§ГўГіГЄГ "), ImVec2(230, 20)))
 		audio_settings_open = !audio_settings_open;
 
-	if (ImGui::Button(LANG(L"Game settings", L"Настройки игры"), ImVec2(230, 20)))
+	if (ImGui::Button(LANG(L"Game settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГЁГЈГ°Г»"), ImVec2(230, 20)))
 		game_settings_open = !game_settings_open;
 
 	ImGui::Spacing();
 	ImGui::Separator();
 	ImGui::Spacing();
 
-	if (ImGui::Button(LANG(L"Exit to main menu", L"Выйти в главное меню"), ImVec2(230, 20)))
+	if (ImGui::Button(LANG(L"Exit to main menu", L"Г‚Г»Г©ГІГЁ Гў ГЈГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ"), ImVec2(230, 20)))
 		exit_to_main_menu(false);
 
-	if (ImGui::Button(LANG(L"Quit game", L"Выход из игры"), ImVec2(230, 20)))
+	if (ImGui::Button(LANG(L"Quit game", L"Г‚Г»ГµГ®Г¤ ГЁГ§ ГЁГЈГ°Г»"), ImVec2(230, 20)))
 		exit(0);
 
 	ImGui::End();
@@ -1747,7 +1747,7 @@ void main_game_menu(Scenario_t& scenario)
 		ImGui::SetNextWindowPos(history_position);
 		ImGui::Begin("##DIALOGUE HISTORY", (bool*)0, ImGuiWindowFlags_::ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_::ImGuiWindowFlags_NoMove | ImGuiWindowFlags_::ImGuiWindowFlags_NoResize | ImGuiWindowFlags_::ImGuiWindowFlags_NoTitleBar);
 
-		ImGui::Text(LANG(L"History", L"История"));
+		ImGui::Text(LANG(L"History", L"Г€Г±ГІГ®Г°ГЁГї"));
 
 		for (int i = 0; i < dialogue_history.size(); i++)
 			ImGui::TextWrapped(utf8(dialogue_history.at(i).c_str()));
@@ -1766,7 +1766,7 @@ void texture_selector(const wchar_t* name, Scenario_t& scenario, std::wstring& t
 	ImGui::Text(utf8(name));
 
 	ImGui::SetNextItemWidth(200);
-	ImGui::InputTextWithHint(std::string(std::string("##SEARCH") + ws2s(name)).c_str(), LANG(L"Search", L"Поиск"), &search_buf);
+	ImGui::InputTextWithHint(std::string(std::string("##SEARCH") + ws2s(name)).c_str(), LANG(L"Search", L"ГЏГ®ГЁГ±ГЄ"), &search_buf);
 
 	ImGui::SetNextItemWidth(200);
 	if (ImGui::BeginListBox(std::string(std::string("##") + ws2s(name)).c_str()))
@@ -1796,7 +1796,7 @@ void scenario_selector(const wchar_t* name, std::wstring& scenario, int idx = 0)
 	ImGui::Text(utf8(name));
 
 	ImGui::SetNextItemWidth(200);
-	ImGui::InputTextWithHint(std::string(std::string("##SEARCH") + ws2s(name) + std::to_string(idx)).c_str(), LANG(L"Search", L"Поиск"), &search_buf);
+	ImGui::InputTextWithHint(std::string(std::string("##SEARCH") + ws2s(name) + std::to_string(idx)).c_str(), LANG(L"Search", L"ГЏГ®ГЁГ±ГЄ"), &search_buf);
 
 	ImGui::SetNextItemWidth(200);
 	if (ImGui::BeginListBox(std::string(std::string("##") + ws2s(name) + std::to_string(idx)).c_str()))
@@ -1826,7 +1826,7 @@ void sound_selector(const wchar_t* name, Scenario_t& scenario, std::wstring& sou
 	ImGui::Text(utf8(name));
 
 	ImGui::SetNextItemWidth(200);
-	ImGui::InputTextWithHint(std::string(std::string("##SEARCH") + ws2s(name)).c_str(), LANG(L"Search", L"Поиск"), &search_buf);
+	ImGui::InputTextWithHint(std::string(std::string("##SEARCH") + ws2s(name)).c_str(), LANG(L"Search", L"ГЏГ®ГЁГ±ГЄ"), &search_buf);
 
 	ImGui::SetNextItemWidth(200);
 	if (ImGui::BeginListBox(std::string(std::string("##") + ws2s(name)).c_str()))
@@ -1863,9 +1863,9 @@ void main_game()
 	if (scenario_editor)
 	{
 		ImGui::SetNextWindowSize(ImVec2(250, 495));
-		ImGui::Begin(LANG(L"Scenario", L"Сценарий"), (bool*)0, ImGuiWindowFlags_::ImGuiWindowFlags_NoResize | ImGuiWindowFlags_::ImGuiWindowFlags_NoCollapse);
+		ImGui::Begin(LANG(L"Scenario", L"Г‘Г¶ГҐГ­Г Г°ГЁГ©"), (bool*)0, ImGuiWindowFlags_::ImGuiWindowFlags_NoResize | ImGuiWindowFlags_::ImGuiWindowFlags_NoCollapse);
 
-		ImGui::Text(LANG(L"Scenes", L"Сцены"));
+		ImGui::Text(LANG(L"Scenes", L"Г‘Г¶ГҐГ­Г»"));
 
 		ImGui::SetNextItemWidth(230);
 		if (ImGui::BeginListBox("##Scene selector"))
@@ -1899,7 +1899,7 @@ void main_game()
 			ImGui::EndListBox();
 		}
 
-		if (ImGui::Button(LANG(L"Create new scene", L"Создать новую сцену"), ImVec2(230, 20)))
+		if (ImGui::Button(LANG(L"Create new scene", L"Г‘Г®Г§Г¤Г ГІГј Г­Г®ГўГіГѕ Г±Г¶ГҐГ­Гі"), ImVec2(230, 20)))
 		{
 			ScenarioDialogueScene_t scene;
 
@@ -1951,7 +1951,7 @@ void main_game()
 			scenario.scenes.push_back(scene);
 		}
 
-		if (ImGui::Button(LANG(L"Create scene duplicate", L"Создать дубликат сцены"), ImVec2(230, 20)))
+		if (ImGui::Button(LANG(L"Create scene duplicate", L"Г‘Г®Г§Г¤Г ГІГј Г¤ГіГЎГ«ГЁГЄГ ГІ Г±Г¶ГҐГ­Г»"), ImVec2(230, 20)))
 		{
 			ScenarioDialogueScene_t new_scene = scene;
 
@@ -1969,14 +1969,14 @@ void main_game()
 		ImGui::Separator();
 		ImGui::Spacing();
 
-		if (ImGui::Button(LANG(L"Edit scene", L"Редактировать сцену"), ImVec2(230, 20)))
+		if (ImGui::Button(LANG(L"Edit scene", L"ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј Г±Г¶ГҐГ­Гі"), ImVec2(230, 20)))
 			editing_scene = true;
 
 		ImGui::Spacing();
 		ImGui::Separator();
 		ImGui::Spacing();
 
-		if (ImGui::Button(LANG(L"Delete scene", L"Удалить сцену"), ImVec2(230, 20)))
+		if (ImGui::Button(LANG(L"Delete scene", L"Г“Г¤Г Г«ГЁГІГј Г±Г¶ГҐГ­Гі"), ImVec2(230, 20)))
 		{
 			if (current_scenario_scene >= 0 && current_scenario_scene < scenario.scenes.size() - 1)
 			{
@@ -1996,7 +1996,7 @@ void main_game()
 		ImGui::Separator();
 		ImGui::Spacing();
 
-		if (ImGui::Button(LANG(L"Save scenario", L"Сохранить сценарий"), ImVec2(230, 20)))
+		if (ImGui::Button(LANG(L"Save scenario", L"Г‘Г®ГµГ°Г Г­ГЁГІГј Г±Г¶ГҐГ­Г Г°ГЁГ©"), ImVec2(230, 20)))
 			save_scenario_data(scenario);
 
 		ImGui::End();
@@ -2004,11 +2004,11 @@ void main_game()
 		if (editing_scene)
 		{
 			ImGui::SetNextWindowSize(ImVec2(600, 400));
-			ImGui::Begin(LANG(L"Scene editor", L"Редактор сцены"), &editing_scene, ImGuiWindowFlags_::ImGuiWindowFlags_NoResize | ImGuiWindowFlags_::ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin(LANG(L"Scene editor", L"ГђГҐГ¤Г ГЄГІГ®Г° Г±Г¶ГҐГ­Г»"), &editing_scene, ImGuiWindowFlags_::ImGuiWindowFlags_NoResize | ImGuiWindowFlags_::ImGuiWindowFlags_NoCollapse);
 
 			if (ImGui::BeginTabBar("##SCENEEDITORTABS"))
 			{
-				if (ImGui::BeginTabItem(LANG(L"Main", L"Основное")))
+				if (ImGui::BeginTabItem(LANG(L"Main", L"ГЋГ±Г­Г®ГўГ­Г®ГҐ")))
 				{
 					if (advanced_scenes)
 						ImGui::Columns(6);
@@ -2020,7 +2020,7 @@ void main_game()
 					if (dialogue_text == "NONE")
 						dialogue_text = "";
 
-					ImGui::Text(LANG(L"Main character text", L"Текст главного персонажа"));
+					ImGui::Text(LANG(L"Main character text", L"Г’ГҐГЄГ±ГІ ГЈГ«Г ГўГ­Г®ГЈГ® ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 					ImGui::SetNextItemWidth(200);
 
 					if (ImGui::InputText("##MAINCHARACTERDIALOGUETEXT", &dialogue_text))
@@ -2033,24 +2033,24 @@ void main_game()
 						scene.main_character.talking = true;
 
 					ImGui::NextColumn();
-					texture_selector(LANG_W(L"Background texture", L"Фоновая текстура"), scenario, scene.background_texture);
+					texture_selector(LANG_W(L"Background texture", L"Г”Г®Г­Г®ГўГ Гї ГІГҐГЄГ±ГІГіГ°Г "), scenario, scene.background_texture);
 
 					if (advanced_scenes)
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Background overlay texture", L"Наложенная фоновая текстура"), scenario, scene.background_overlay_texture);
+						texture_selector(LANG_W(L"Background overlay texture", L"ГЌГ Г«Г®Г¦ГҐГ­Г­Г Гї ГґГ®Г­Г®ГўГ Гї ГІГҐГЄГ±ГІГіГ°Г "), scenario, scene.background_overlay_texture);
 					}
 
 					ImGui::NextColumn();
-					sound_selector(LANG_W(L"Background music", L"Фоновая музыка"), scenario, scene.background_music);
+					sound_selector(LANG_W(L"Background music", L"Г”Г®Г­Г®ГўГ Гї Г¬ГіГ§Г»ГЄГ "), scenario, scene.background_music);
 
 					ImGui::NextColumn();
-					sound_selector(LANG_W(L"Additional sound", L"Дополнительный звук"), scenario, scene.additional_scene_sound);
+					sound_selector(LANG_W(L"Additional sound", L"Г„Г®ГЇГ®Г«Г­ГЁГІГҐГ«ГјГ­Г»Г© Г§ГўГіГЄ"), scenario, scene.additional_scene_sound);
 
 					if (advanced_scenes)
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Screen overlay texture", L"Наложенная текстура"), scenario, scene.overlay_texture);
+						texture_selector(LANG_W(L"Screen overlay texture", L"ГЌГ Г«Г®Г¦ГҐГ­Г­Г Гї ГІГҐГЄГ±ГІГіГ°Г "), scenario, scene.overlay_texture);
 					}
 
 					ImGui::Columns(1);
@@ -2058,7 +2058,7 @@ void main_game()
 					ImGui::EndTabItem();
 				}
 
-				if (ImGui::BeginTabItem(LANG(L"Character 1", L"Персонаж 1")))
+				if (ImGui::BeginTabItem(LANG(L"Character 1", L"ГЏГҐГ°Г±Г®Г­Г Г¦ 1")))
 				{
 					ScenarioDialogueScenePersonData_t& person = scene.person1;
 
@@ -2072,7 +2072,7 @@ void main_game()
 					if (dialogue_name == "NONE")
 						dialogue_name = "";
 
-					ImGui::Text(LANG(L"Character name", L"Имя персонажа"));
+					ImGui::Text(LANG(L"Character name", L"Г€Г¬Гї ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER1DIALOGUENAME", &dialogue_name))
@@ -2083,7 +2083,7 @@ void main_game()
 					if (dialogue_text == "NONE")
 						dialogue_text = "";
 
-					ImGui::Text(LANG(L"Character text", L"Текст персонажа"));
+					ImGui::Text(LANG(L"Character text", L"Г’ГҐГЄГ±ГІ ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER1DIALOGUETEXT", &dialogue_text))
@@ -2101,18 +2101,18 @@ void main_game()
 					if (advanced_scenes)
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Left body texture", L"Текстура левой части тела"), scenario, person.person_texture_left);
+						texture_selector(LANG_W(L"Left body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  Г«ГҐГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_left);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Right body texture", L"Текстура правой части тела"), scenario, person.person_texture_right);
+						texture_selector(LANG_W(L"Right body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЇГ°Г ГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_right);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Head texture", L"Текстура головы"), scenario, person.person_texture_head);
+						texture_selector(LANG_W(L"Head texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЈГ®Г«Г®ГўГ»"), scenario, person.person_texture_head);
 					}
 					else
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Body texture", L"Текстура тела"), scenario, person.person_texture);
+						texture_selector(LANG_W(L"Body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГІГҐГ«Г "), scenario, person.person_texture);
 					}
 
 					ImGui::Columns(1);
@@ -2120,7 +2120,7 @@ void main_game()
 					ImGui::EndTabItem();
 				}
 
-				if (ImGui::BeginTabItem(LANG(L"Character 2", L"Персонаж 2")))
+				if (ImGui::BeginTabItem(LANG(L"Character 2", L"ГЏГҐГ°Г±Г®Г­Г Г¦ 2")))
 				{
 					ScenarioDialogueScenePersonData_t& person = scene.person2;
 
@@ -2134,7 +2134,7 @@ void main_game()
 					if (dialogue_name == "NONE")
 						dialogue_name = "";
 
-					ImGui::Text(LANG(L"Character name", L"Имя персонажа"));
+					ImGui::Text(LANG(L"Character name", L"Г€Г¬Гї ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER2DIALOGUENAME", &dialogue_name))
@@ -2145,7 +2145,7 @@ void main_game()
 					if (dialogue_text == "NONE")
 						dialogue_text = "";
 
-					ImGui::Text(LANG(L"Character text", L"Текст персонажа"));
+					ImGui::Text(LANG(L"Character text", L"Г’ГҐГЄГ±ГІ ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER2DIALOGUETEXT", &dialogue_text))
@@ -2163,18 +2163,18 @@ void main_game()
 					if (advanced_scenes)
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Left body texture", L"Текстура левой части тела"), scenario, person.person_texture_left);
+						texture_selector(LANG_W(L"Left body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  Г«ГҐГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_left);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Right body texture", L"Текстура правой части тела"), scenario, person.person_texture_right);
+						texture_selector(LANG_W(L"Right body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЇГ°Г ГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_right);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Head texture", L"Текстура головы"), scenario, person.person_texture_head);
+						texture_selector(LANG_W(L"Head texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЈГ®Г«Г®ГўГ»"), scenario, person.person_texture_head);
 					}
 					else
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Body texture", L"Текстура тела"), scenario, person.person_texture);
+						texture_selector(LANG_W(L"Body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГІГҐГ«Г "), scenario, person.person_texture);
 					}
 
 					ImGui::Columns(1);
@@ -2182,7 +2182,7 @@ void main_game()
 					ImGui::EndTabItem();
 				}
 
-				if (ImGui::BeginTabItem(LANG(L"Character 3", L"Персонаж 3")))
+				if (ImGui::BeginTabItem(LANG(L"Character 3", L"ГЏГҐГ°Г±Г®Г­Г Г¦ 3")))
 				{
 					ScenarioDialogueScenePersonData_t& person = scene.person3;
 
@@ -2196,7 +2196,7 @@ void main_game()
 					if (dialogue_name == "NONE")
 						dialogue_name = "";
 
-					ImGui::Text(LANG(L"Character name", L"Имя персонажа"));
+					ImGui::Text(LANG(L"Character name", L"Г€Г¬Гї ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER3DIALOGUENAME", &dialogue_name))
@@ -2207,7 +2207,7 @@ void main_game()
 					if (dialogue_text == "NONE")
 						dialogue_text = "";
 
-					ImGui::Text(LANG(L"Character text", L"Текст персонажа"));
+					ImGui::Text(LANG(L"Character text", L"Г’ГҐГЄГ±ГІ ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER3DIALOGUETEXT", &dialogue_text))
@@ -2225,18 +2225,18 @@ void main_game()
 					if (advanced_scenes)
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Left body texture", L"Текстура левой части тела"), scenario, person.person_texture_left);
+						texture_selector(LANG_W(L"Left body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  Г«ГҐГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_left);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Right body texture", L"Текстура правой части тела"), scenario, person.person_texture_right);
+						texture_selector(LANG_W(L"Right body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЇГ°Г ГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_right);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Head texture", L"Текстура головы"), scenario, person.person_texture_head);
+						texture_selector(LANG_W(L"Head texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЈГ®Г«Г®ГўГ»"), scenario, person.person_texture_head);
 					}
 					else
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Body texture", L"Текстура тела"), scenario, person.person_texture);
+						texture_selector(LANG_W(L"Body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГІГҐГ«Г "), scenario, person.person_texture);
 					}
 
 					ImGui::Columns(1);
@@ -2244,7 +2244,7 @@ void main_game()
 					ImGui::EndTabItem();
 				}
 
-				if (ImGui::BeginTabItem(LANG(L"Character 4", L"Персонаж 4")))
+				if (ImGui::BeginTabItem(LANG(L"Character 4", L"ГЏГҐГ°Г±Г®Г­Г Г¦ 4")))
 				{
 					ScenarioDialogueScenePersonData_t& person = scene.person4;
 
@@ -2258,7 +2258,7 @@ void main_game()
 					if (dialogue_name == "NONE")
 						dialogue_name = "";
 
-					ImGui::Text(LANG(L"Character name", L"Имя персонажа"));
+					ImGui::Text(LANG(L"Character name", L"Г€Г¬Гї ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER4DIALOGUENAME", &dialogue_name))
@@ -2269,7 +2269,7 @@ void main_game()
 					if (dialogue_text == "NONE")
 						dialogue_text = "";
 
-					ImGui::Text(LANG(L"Character text", L"Текст персонажа"));
+					ImGui::Text(LANG(L"Character text", L"Г’ГҐГЄГ±ГІ ГЇГҐГ°Г±Г®Г­Г Г¦Г "));
 
 					ImGui::SetNextItemWidth(200);
 					if (ImGui::InputText("##CHARACTER4DIALOGUETEXT", &dialogue_text))
@@ -2287,18 +2287,18 @@ void main_game()
 					if (advanced_scenes)
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Left body texture", L"Текстура левой части тела"), scenario, person.person_texture_left);
+						texture_selector(LANG_W(L"Left body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  Г«ГҐГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_left);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Right body texture", L"Текстура правой части тела"), scenario, person.person_texture_right);
+						texture_selector(LANG_W(L"Right body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЇГ°Г ГўГ®Г© Г·Г Г±ГІГЁ ГІГҐГ«Г "), scenario, person.person_texture_right);
 
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Head texture", L"Текстура головы"), scenario, person.person_texture_head);
+						texture_selector(LANG_W(L"Head texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГЈГ®Г«Г®ГўГ»"), scenario, person.person_texture_head);
 					}
 					else
 					{
 						ImGui::NextColumn();
-						texture_selector(LANG_W(L"Body texture", L"Текстура тела"), scenario, person.person_texture);
+						texture_selector(LANG_W(L"Body texture", L"Г’ГҐГЄГ±ГІГіГ°Г  ГІГҐГ«Г "), scenario, person.person_texture);
 					}
 
 					ImGui::Columns(1);
@@ -2306,7 +2306,7 @@ void main_game()
 					ImGui::EndTabItem();
 				}
 
-				if (ImGui::BeginTabItem(LANG(L"Buttons", L"Кнопки")))
+				if (ImGui::BeginTabItem(LANG(L"Buttons", L"ГЉГ­Г®ГЇГЄГЁ")))
 				{
 					ImGui::Columns(4);
 
@@ -2318,7 +2318,7 @@ void main_game()
 						if (button_name == "NONE")
 							button_name = "";
 
-						ImGui::Text(LANG(L"Button name", L"Название кнопки"));
+						ImGui::Text(LANG(L"Button name", L"ГЌГ Г§ГўГ Г­ГЁГҐ ГЄГ­Г®ГЇГЄГЁ"));
 
 						ImGui::SetNextItemWidth(200);
 
@@ -2328,7 +2328,7 @@ void main_game()
 						if (button_name == "")
 							button.button_name = L"NONE";
 
-						scenario_selector(LANG_W(L"Scenario to load", L"Сценарий для загрузки"), button.button_scenario_to_load, 1);
+						scenario_selector(LANG_W(L"Scenario to load", L"Г‘Г¶ГҐГ­Г Г°ГЁГ© Г¤Г«Гї Г§Г ГЈГ°ГіГ§ГЄГЁ"), button.button_scenario_to_load, 1);
 					}
 					ImGui::NextColumn();
 
@@ -2340,7 +2340,7 @@ void main_game()
 						if (button_name == "NONE")
 							button_name = "";
 
-						ImGui::Text(LANG(L"Button name", L"Название кнопки"));
+						ImGui::Text(LANG(L"Button name", L"ГЌГ Г§ГўГ Г­ГЁГҐ ГЄГ­Г®ГЇГЄГЁ"));
 
 						ImGui::SetNextItemWidth(200);
 
@@ -2350,7 +2350,7 @@ void main_game()
 						if (button_name == "")
 							button.button_name = L"NONE";
 
-						scenario_selector(LANG_W(L"Scenario to load", L"Сценарий для загрузки"), button.button_scenario_to_load, 2);
+						scenario_selector(LANG_W(L"Scenario to load", L"Г‘Г¶ГҐГ­Г Г°ГЁГ© Г¤Г«Гї Г§Г ГЈГ°ГіГ§ГЄГЁ"), button.button_scenario_to_load, 2);
 					}
 					ImGui::NextColumn();
 
@@ -2362,7 +2362,7 @@ void main_game()
 						if (button_name == "NONE")
 							button_name = "";
 
-						ImGui::Text(LANG(L"Button name", L"Название кнопки"));
+						ImGui::Text(LANG(L"Button name", L"ГЌГ Г§ГўГ Г­ГЁГҐ ГЄГ­Г®ГЇГЄГЁ"));
 
 						ImGui::SetNextItemWidth(200);
 
@@ -2372,7 +2372,7 @@ void main_game()
 						if (button_name == "")
 							button.button_name = L"NONE";
 
-						scenario_selector(LANG_W(L"Scenario to load", L"Сценарий для загрузки"), button.button_scenario_to_load, 3);
+						scenario_selector(LANG_W(L"Scenario to load", L"Г‘Г¶ГҐГ­Г Г°ГЁГ© Г¤Г«Гї Г§Г ГЈГ°ГіГ§ГЄГЁ"), button.button_scenario_to_load, 3);
 					}
 					ImGui::NextColumn();
 
@@ -2384,7 +2384,7 @@ void main_game()
 						if (button_name == "NONE")
 							button_name = "";
 
-						ImGui::Text(LANG(L"Button name", L"Название кнопки"));
+						ImGui::Text(LANG(L"Button name", L"ГЌГ Г§ГўГ Г­ГЁГҐ ГЄГ­Г®ГЇГЄГЁ"));
 
 						ImGui::SetNextItemWidth(200);
 
@@ -2394,7 +2394,7 @@ void main_game()
 						if (button_name == "")
 							button.button_name = L"NONE";
 
-						scenario_selector(LANG_W(L"Scenario to load", L"Сценарий для загрузки"), button.button_scenario_to_load, 4);
+						scenario_selector(LANG_W(L"Scenario to load", L"Г‘Г¶ГҐГ­Г Г°ГЁГ© Г¤Г«Гї Г§Г ГЈГ°ГіГ§ГЄГЁ"), button.button_scenario_to_load, 4);
 					}
 
 					ImGui::Columns(1);
@@ -3038,7 +3038,7 @@ void game_render()
 				select_scenario = false;
 
 #ifndef DCS_STORY_GAME
-			ImGui::Text(LANG(L"Select scenario", L"Выберите сценарий"));
+			ImGui::Text(LANG(L"Select scenario", L"Г‚Г»ГЎГҐГ°ГЁГІГҐ Г±Г¶ГҐГ­Г Г°ГЁГ©"));
 
 			ImGui::SetNextItemWidth(230);
 			if (ImGui::BeginListBox("##Scenario selector"))
@@ -3064,12 +3064,12 @@ void game_render()
 				ImGui::Spacing();
 
 				static char scenario_name[64];
-				ImGui::Text(LANG(L"Enter new scenario name", L"Введите название нового сценария"));
+				ImGui::Text(LANG(L"Enter new scenario name", L"Г‚ГўГҐГ¤ГЁГІГҐ Г­Г Г§ГўГ Г­ГЁГҐ Г­Г®ГўГ®ГЈГ® Г±Г¶ГҐГ­Г Г°ГЁГї"));
 
 				ImGui::SetNextItemWidth(230);
 				ImGui::InputText("##Scenario name input", scenario_name, 64);
 
-				if (ImGui::Button(LANG(L"Create new scenario", L"Создать новый сценарий"), ImVec2(230, 20)))
+				if (ImGui::Button(LANG(L"Create new scenario", L"Г‘Г®Г§Г¤Г ГІГј Г­Г®ГўГ»Г© Г±Г¶ГҐГ­Г Г°ГЁГ©"), ImVec2(230, 20)))
 				{
 					create_new_scenario(s2ws(std::string(scenario_name)));
 
@@ -3085,14 +3085,14 @@ void game_render()
 				ImGui::Spacing();
 
 				static char player_name[32];
-				ImGui::Text(LANG(L"Enter player name", L"Введите имя игрока"));
+				ImGui::Text(LANG(L"Enter player name", L"Г‚ГўГҐГ¤ГЁГІГҐ ГЁГ¬Гї ГЁГЈГ°Г®ГЄГ "));
 
 				ImGui::SetNextItemWidth(230);
 				ImGui::InputText("##Player name input", player_name, 32);
 
 				if (std::string(player_name) != "" && std::string(player_name) != " ")
 				{
-					if (ImGui::Button(scenario_editor ? LANG(L"Edit", L"Редактировать") : LANG(L"Play", L"Играть"), ImVec2(230, 20)))
+					if (ImGui::Button(scenario_editor ? LANG(L"Edit", L"ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј") : LANG(L"Play", L"Г€ГЈГ°Г ГІГј"), ImVec2(230, 20)))
 					{
 						wchar_t WBuf[32];
 						mbstowcs(WBuf, player_name, 31);
@@ -3113,7 +3113,7 @@ void game_render()
 			if (ImGui::Button("<", ImVec2(230, 20)))
 				select_save = false;
 
-			ImGui::Text(LANG(L"Select save", L"Выберите сохранение"));
+			ImGui::Text(LANG(L"Select save", L"Г‚Г»ГЎГҐГ°ГЁГІГҐ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ"));
 
 			ImGui::SetNextItemWidth(230);
 			if (ImGui::BeginListBox("##Scenario save"))
@@ -3127,7 +3127,7 @@ void game_render()
 				ImGui::EndListBox();
 			}
 
-			if (ImGui::Button(LANG(L"Refresh list", L"Обновить список"), ImVec2(230, 20)))
+			if (ImGui::Button(LANG(L"Refresh list", L"ГЋГЎГ­Г®ГўГЁГІГј Г±ГЇГЁГ±Г®ГЄ"), ImVec2(230, 20)))
 			{
 				saves = get_directory_files_name_w(L".\\game\\saves", L".savegame");
 				save_names = get_directory_files_name(".\\game\\saves", ".savegame");
@@ -3139,7 +3139,7 @@ void game_render()
 				ImGui::Separator();
 				ImGui::Spacing();
 
-				if (ImGui::Button(LANG(L"Play", L"Играть"), ImVec2(230, 20)))
+				if (ImGui::Button(LANG(L"Play", L"Г€ГЈГ°Г ГІГј"), ImVec2(230, 20)))
 				{
 					GameSave_t save;
 
@@ -3157,18 +3157,18 @@ void game_render()
 						game_settings_open = false;
 					}
 					else
-						MessageBoxW(GetForegroundWindow(), LANG_W(L"Failed to load save", L"Не удалось загрузить сохранение"), LANG_W(L"Error", L"Ошибка"), 0);
+						MessageBoxW(GetForegroundWindow(), LANG_W(L"Failed to load save", L"ГЌГҐ ГіГ¤Г Г«Г®Г±Гј Г§Г ГЈГ°ГіГ§ГЁГІГј Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ"), LANG_W(L"Error", L"ГЋГёГЁГЎГЄГ "), 0);
 				}
 			}
 		}
 		else
 		{
-			if (ImGui::Button(scenario_editor ? LANG(L"Edit scenario", L"Редактировать сценарий") : LANG(L"Start new game", L"Начать новую игру"), ImVec2(230, 20)))
+			if (ImGui::Button(scenario_editor ? LANG(L"Edit scenario", L"ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј Г±Г¶ГҐГ­Г Г°ГЁГ©") : LANG(L"Start new game", L"ГЌГ Г·Г ГІГј Г­Г®ГўГіГѕ ГЁГЈГ°Гі"), ImVec2(230, 20)))
 				select_scenario = true;
 
 			if (!scenario_editor)
 			{
-				if (ImGui::Button(LANG(L"Load save", L"Загрузить сохранение"), ImVec2(230, 20)))
+				if (ImGui::Button(LANG(L"Load save", L"Г‡Г ГЈГ°ГіГ§ГЁГІГј Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ"), ImVec2(230, 20)))
 					select_save = true;
 			}
 
@@ -3176,13 +3176,13 @@ void game_render()
 			ImGui::Separator();
 			ImGui::Spacing();
 
-			if (ImGui::Button(LANG(L"Video settings", L"Настройки видео"), ImVec2(230, 20)))
+			if (ImGui::Button(LANG(L"Video settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГўГЁГ¤ГҐГ®"), ImVec2(230, 20)))
 				video_settings_open = !video_settings_open;
 
-			if (ImGui::Button(LANG(L"Audio settings", L"Настройки звука"), ImVec2(230, 20)))
+			if (ImGui::Button(LANG(L"Audio settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ Г§ГўГіГЄГ "), ImVec2(230, 20)))
 				audio_settings_open = !audio_settings_open;
 
-			if (ImGui::Button(LANG(L"Game settings", L"Настройки игры"), ImVec2(230, 20)))
+			if (ImGui::Button(LANG(L"Game settings", L"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГЁГЈГ°Г»"), ImVec2(230, 20)))
 				game_settings_open = !game_settings_open;
 
 			if (wcsstr(GetCommandLineW(), L"-skid1337"))
@@ -3195,7 +3195,7 @@ void game_render()
 			ImGui::Separator();
 			ImGui::Spacing();
 
-			if (ImGui::Button(LANG(L"Quit game", L"Выход из игры"), ImVec2(230, 20)))
+			if (ImGui::Button(LANG(L"Quit game", L"Г‚Г»ГµГ®Г¤ ГЁГ§ ГЁГЈГ°Г»"), ImVec2(230, 20)))
 				exit(0);
 		}
 
