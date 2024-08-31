@@ -8,5 +8,6 @@ Engine for visual novel games written in C++.
 - Ton of shitcode.
 
 Credits
-https://www.un4seen.com/ - Audio library
-https://github.com/ocornut/imgui/ - GUI library
+https://www.un4seen.com/
+https://github.com/ocornut/imgui/
+https://www.sfml-dev.org/
