@@ -4,10 +4,13 @@ Engine and game template for visual novel games written in C++.
 ## Features
 
 - DirectX 11 and OpenGL rendering.
+- Basic GUI.
 - Builtin scenario editor.
 - Automatic character centering.
 - Basic and advanced character rendering mode.
 - Music and sound support.
+- Screenshots (F12).
+- Basic save/load game system.
 - Ton of shitcode.
 
 ## Config parameters
