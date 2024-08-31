@@ -14,11 +14,10 @@
 // --------------------------------------------------------------------- //
 
 #define DCS_CONFIG
+#define DCS_OPENGL
 
 #if defined(DCS_CONFIG)
 #define DISCORD_RPC
 #elif defined(DDLC_CPP_CONFIG)
 #define DCS_STORY_GAME
 #endif
-
-#define DCS_OPENGL
