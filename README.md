@@ -1,5 +1,5 @@
-# Visual Novel Engine
-Engine for visual novel games written in C++.
+# DVI Cable Simulator (Visual Novel Engine)
+Engine and game template for visual novel games written in C++.
 
 - Builtin scenario editor.
 - Automatic character centering.
